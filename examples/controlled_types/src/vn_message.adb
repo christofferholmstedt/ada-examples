@@ -2,39 +2,32 @@ with VN_Message.Local_Hello;
 
 package body VN_Message is
 
-   procedure Cast_Message_To(Message: in out VN_Message'Class; Msg_Type: Message_Type) is
-   begin
-      null;
-
---      case Msg_Type is
---         when Local_Hello     => Message := VN_Message.Local_Hello.VN_Message_Local_Hello (Message);
---         when Others          => null;
---      end case;
---
-   end Cast_Message_To;
-
    -- Get_Version
-   function Get_Version(Message: VN_Message'Class) return VN_Version is
+   function Get_Version(Message: VN_Message) return VN_Version is
    begin
       return Message.Header.Version;
    end Get_Version;
 
    -- Set_Version
-   procedure Set_Version(Message: out VN_Message'Class; Version: VN_Version ) is
+   procedure Set_Version(Message: out VN_Message; Version: VN_Version ) is
    begin
       Message.Header.Version := Version;
    end Set_Version;
 
-   function Get_Checksum(Message: in VN_Message'Class) return VN_Checksum is
+   function Get_Checksum(Message: in VN_Message) return VN_Checksum is
    begin
       return Message.Footer.Checksum;
    end Get_Checksum;
 
-   procedure Update_Checksum(Message: in out VN_Message'Class) is
+   -------------
+   -- Private --
+   -------------
+   overriding
+   procedure Finalize(Object: in out VN_Message) is
    begin
-      Message.Footer.Checksum := 5; -- TODO: Update the checksum with a proper
-                                    -- value.
-   end Update_Checksum;
+      null;
+   end Finalize;
+
 --
 --   function Serialize_VN_Message(Message: VN_Message'Class;
 --                                 Output_Format: Serializiation_Type)

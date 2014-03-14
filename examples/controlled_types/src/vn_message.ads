@@ -1,3 +1,5 @@
+with Ada.Finalization;
+
 package VN_Message is
 
    -- Enum of different VN_Messages types.
@@ -27,23 +29,22 @@ package VN_Message is
    type VN_Component_Type is mod 2 ** 8;
 
    -- VN_Message
-   type VN_Message is abstract tagged private;
-   type VN_Message_Access is access all VN_Message'Class;
+   type VN_Message is tagged private;
+   type VN_Message_Access is access all VN_Message'Class; -- VN_Version
 
-   procedure Cast_Message_To(Message: in out VN_Message'Class; Msg_Type: Message_Type);
-
-   -- VN_Version
-   function Get_Version(Message: VN_Message'Class) return VN_Version;
-   procedure Set_Version(Message: out VN_Message'Class; Version: VN_Version);
+   function Get_Version(Message: VN_Message) return VN_Version;
+   procedure Set_Version(Message: out VN_Message; Version: VN_Version);
 
    -- VN_Checksum
-   function Get_Checksum(Message: VN_Message'Class) return VN_Checksum;
-   procedure Update_Checksum(Message: in out VN_Message'Class);
+   function Get_Checksum(Message: VN_Message) return VN_Checksum;
+   -- Update_Checksum must have access to Payload, only available in children.
+   procedure Update_Checksum(Message: in out VN_Message) is null;
 
 
    -- VN_Payload
-   function Get_Payload(Message: VN_Message'Class) return VN_Payload is abstract;
-   procedure Set_Payload(Message: VN_Message'Class; Payload: VN_Payload) is abstract;
+   -- Get_Payload must have access to Payload, only available in children.
+   procedure Get_Payload(Message: in VN_Message; Payload: in out VN_Payload) is null;
+   procedure Set_Payload(Message: in VN_Message; Payload: in VN_Payload) is null;
 
 --   function Serialize_VN_Message(Message: in VN_Message'Class;
 --                                 Output_Format: in Serializiation_Type)
@@ -54,7 +55,7 @@ package VN_Message is
 --                                 -- return VN_Message'Class;
 
 private
-   type VN_Message is abstract tagged
+   type VN_Message is new Ada.Finalization.Controlled with
       record
          Header   : VN_Header;
          Payload  : VN_Payload;
@@ -78,5 +79,8 @@ private
       record
          Checksum : VN_Checksum := 0;
       end record;
+
+   overriding
+   procedure Finalize(Object: in out VN_Message);
 
 end VN_Message;
