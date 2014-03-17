@@ -3,21 +3,21 @@ with Ada.Finalization;
 package Factory is
 
    -- VN_Message
-   type Day_Type is tagged private;
-   type Day_Access is access Day_Type;
+   type Door is tagged private;
+   type Door_Access is access Door;
 
-   subtype Day_Number_Type is Positive range 1 .. 31;
+   subtype Door_ID is Positive;
 
-   function Get_Day_Number(Day: in Day_Type) return Day_Number_Type;
-   procedure Set_Day_Number(Day: out Day_Type; Input: in Day_Number_Type);
+   function Get_Door_Number(this: in Door) return Door_ID;
+   procedure Set_Door_Number(this: out Door; Input: in Door_ID);
 
 private
-   type Day_Type is new Ada.Finalization.Controlled with
+   type Door is new Ada.Finalization.Controlled with
       record
-         Day_Number : Day_Number_Type;
+         Door_Number: Door_ID;
       end record;
 
    overriding
-   procedure Finalize(Day: in out Day_Type);
+   procedure Finalize(this: in out Door);
 
 end Factory;

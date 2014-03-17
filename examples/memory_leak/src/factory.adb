@@ -1,20 +1,20 @@
 package body Factory is
 
-   function Get_Day_Number(Day: in Day_Type) return Day_Number_Type is
+   function Get_Door_Number(this: in Door) return Door_ID is
    begin
-      return Day.Day_Number;
-   end Get_Day_Number;
+      return this.Door_Number;
+   end Get_Door_Number;
 
-   procedure Set_Day_Number(Day: out Day_Type; Input: in Day_Number_Type) is
+   procedure Set_Door_Number(this: out Door; Input: in Door_ID) is
    begin
-      Day.Day_Number := Input;
-   end Set_Day_Number;
+      this.Door_Number := Input;
+   end Set_Door_Number;
 
    -------------
    -- Private --
    -------------
    overriding
-   procedure Finalize(Day: in out Day_Type) is
+   procedure Finalize(this: in out Door) is
    begin
       null;
    end Finalize;
