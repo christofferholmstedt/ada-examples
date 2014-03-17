@@ -1,47 +1,53 @@
-with VN_Message.Local_Hello;
+with Ada.Finalization;
+with Ada.Text_IO;
 
 package body VN_Message is
 
-   -- Get_Version
-   function Get_Version(Message: VN_Message) return VN_Version is
+   -- Create VN_Message
+   function Create_VN_Message(input: in String; number: in positive) return VN_Message is
+      Message: VN_Message;
    begin
-      return Message.Header.Version;
-   end Get_Version;
+      Ada.Text_IO.Put_Line("Start Create_VN_Message");
+      Message.Payload := input;
+      Message.Number := number;
+      Ada.Text_IO.Put_Line("End Create_VN_Message");
+      return Message;
+   end;
 
-   -- Set_Version
-   procedure Set_Version(Message: out VN_Message; Version: VN_Version ) is
+   function Get_Payload(This: in VN_Message) return String is
    begin
-      Message.Header.Version := Version;
-   end Set_Version;
+      return This.Payload;
+   end Get_Payload;
 
-   function Get_Checksum(Message: in VN_Message) return VN_Checksum is
+   function Get_Number(This: in VN_Message) return Positive is
    begin
-      return Message.Footer.Checksum;
-   end Get_Checksum;
+      return This.Number;
+   end Get_Number;
 
-   -------------
-   -- Private --
-   -------------
+   procedure Set_Number(This: in out VN_Message; Number: in Positive) is
+   begin
+      This.Number := Number;
+   end Set_Number;
+
    overriding
-   procedure Finalize(Object: in out VN_Message) is
+   procedure Initialize(This: in out VN_Message) is
    begin
-      null;
-   end Finalize;
+     null;
+     -- Ada.Text_IO.Put_Line("Initialized message: " & This.Payload);
+   end;
 
---
---   function Serialize_VN_Message(Message: VN_Message'Class;
---                                 Output_Format: Serializiation_Type)
---                                 return Natural is
---   begin
---      return 0; -- TODO: Return a proper serialization of this.
---   end Serialize_VN_Message;
---
---   function Deserialize_VN_Message(Data: in Natural) -- TODO: How is Data represented? String?
---                              return Natural is
---                              -- return VN_Message'Class is
---   begin
---      -- TODO: Process the Data properly.
---      return Data;
---   end Deserialize_VN_Message;
+   overriding
+   procedure Adjust(This: in out VN_Message) is
+   begin
+     null;
+     -- Ada.Text_IO.Put_Line("Adjust message: " & This.Payload);
+   end;
+
+   overriding
+   procedure Finalize(This: in out VN_Message) is
+   begin
+     null;
+     -- Ada.Text_IO.Put_Line("Finalized message: " & This.Payload);
+   end;
 
 end VN_Message;
