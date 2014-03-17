@@ -1,0 +1,10 @@
+project Memory_Leak is
+    for Source_Dirs use ("src");
+    for Object_Dir use "obj";
+    for Main use ("main_with_memory_leak.adb", "main_without_memory_leak.adb");
+
+    package Compiler is
+       for Local_Configuration_Pragmas use "project_pragmas";
+    end Compiler;
+
+end Memory_Leak;
