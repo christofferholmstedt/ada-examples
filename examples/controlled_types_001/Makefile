@@ -5,15 +5,15 @@ ubuntu: all
 
 ravenscar: clean
 	echo "pragma Profile(Ravenscar);" > project_pragmas
-	gnatmake -d -p -P memory_leak.gpr
+	gnatmake -d -p -P controlled_types.gpr
 
 restricted: clean
 	echo "pragma Profile(Restricted);" > project_pragmas
-	gnatmake -d -p -P memory_leak.gpr
+	gnatmake -d -p -P controlled_types.gpr
 
 all: clean
 	echo "" > project_pragmas
-	gnatmake -d -p -P memory_leak.gpr
+	gnatmake -d -p -P controlled_types.gpr
 
 clean:
 	rm -rf obj/*.o
