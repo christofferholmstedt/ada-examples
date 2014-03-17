@@ -15,8 +15,8 @@ private
          Door_Name: String(1 .. 5);
       end record;
 
--- overriding
--- procedure Initialize(this: in out Controlled_Door);
+   overriding
+   procedure Initialize(this: in out Controlled_Door);
 
    overriding
    procedure Adjust(this: in out Controlled_Door);
