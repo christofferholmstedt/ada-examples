@@ -1,6 +1,4 @@
 #!/bin/bash -e
-pwd
-cd ../examples/calculator_aunit
-pwd
+cd ./examples/calculator_aunit
 make test
 ./obj/harness
