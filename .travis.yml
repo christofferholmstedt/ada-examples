@@ -6,7 +6,9 @@ before_install:
     - sudo apt-get install -qq gnat libaunit2-dev
 
 # To test that travis can pass a build
-script: ./scripts/exit-true.sh
+# script: ./scripts/exit-true.sh
+
+script: ./scripts/run-tests.sh
 
 notifications:
   email: false
