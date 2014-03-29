@@ -6,4 +6,4 @@
 ###
 # Install GNAT
 ###
-sudo apt-get -y install gnat
+sudo apt-get -y install gnat libaunit2-dev
