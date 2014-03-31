@@ -52,4 +52,4 @@ sudo ufw status verbose
 ###
 # Install some basic tools that can be useful.
 ###
-sudo apt-get -y install vim git build-essential
+sudo apt-get -y install vim git mercurial build-essential
