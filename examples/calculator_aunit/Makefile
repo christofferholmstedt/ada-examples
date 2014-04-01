@@ -1,5 +1,6 @@
 .PHONY: clean
 .PHONY: all
+.PHONY: tests
 
 ubuntu: all
 
@@ -15,7 +16,7 @@ all: clean
 	echo "" > project_pragmas
 	gnatmake -d -p -P calculator.gpr
 
-test:
+tests:
 	gnatmake -d -p -P calculator_tests.gpr
 
 clean:
@@ -23,6 +24,7 @@ clean:
 
 clean-all:
 	gnat clean -r -P calculator.gpr
+	gnat clean -r -P calculator_tests.gpr
 
-clean-test:
+clean-tests:
 	gnat clean -r -P calculator_tests.gpr
