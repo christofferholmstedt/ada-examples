@@ -1,7 +1,7 @@
 with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
 with AUnit.Test_Cases; use AUnit.Test_Cases;
 
-package Calc_Tests is
+package Calc.Calc_Tests is
 
    type Test_Case is new AUnit.Test_Cases.Test_Case with null record;
 
@@ -12,4 +12,4 @@ package Calc_Tests is
 private
    procedure Test_Sum (T : in out Aunit.Test_Cases.Test_Case'Class);
 
-end Calc_Tests;
+end Calc.Calc_Tests;

@@ -1,9 +1,9 @@
 with AUnit.Test_Cases.Registration; use AUnit.Test_Cases.Registration;
 with AUnit.Assertions; use AUnit.Assertions;
 
-with Calc;
+-- with Calc;
 
-package body Calc_Tests is
+package body Calc.Calc_Tests is
 
    procedure Test_Sum (T : in out Aunit.Test_Cases.Test_Case'Class) is
       pragma Unreferenced (T);
@@ -21,4 +21,4 @@ package body Calc_Tests is
       return new String'("Calculator tests");
    end Name;
 
-end Calc_Tests;
+end Calc.Calc_Tests;

@@ -3,14 +3,14 @@ with AUnit.Test_Runner;
 
 --  List of tests and suites to run
 
-with Calc_Tests;
+with Calc.Calc_Tests;
 
 procedure Harness is
    function Suite return Access_Test_Suite is
       Result : Access_Test_Suite := new Test_Suite;
    begin
       --  You may add multiple tests or suites here:
-      Add_Test (Result, new Calc_Tests.Test_Case);
+      Add_Test (Result, new Calc.Calc_Tests.Test_Case);
       return Result;
    end Suite;
 
